@@ -65,8 +65,45 @@ This project is licensed under the ${license}. To see the license permissions fo
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
+  const licenseSection = renderLicenseSection(license);
+
   return `# ${data.title}
 
+## Description
+
+${data.description}
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+- [How to Contribute](#how-to-contribute)
+- [Tests](#tests)
+
+## Installation
+
+${data.installation}
+
+## Usage
+
+${data.usage}
+
+## Credits
+
+Github Username: ${data.username}
+Contact Email: ${data.email}
+
+${licenseSection}
+
+## How to Contribute
+
+${data.contributions}
+
+## Tests
+
+${data.testing}
 `;
 }
 
