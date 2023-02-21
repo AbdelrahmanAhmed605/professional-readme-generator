@@ -4,6 +4,11 @@ const validator = require("email-validator");
 const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown.js");
 
+//Helper functions to output text in the terminal in different colors
+const outputRedText = (text) => console.log(`\u001b[31m${text}\u001b[0m`);
+const outputGreenText = (text) => console.log(`\u001b[92m${text}\u001b[0m`);
+const outputCyanText = (text) => console.log(`\u001b[36m${text}\u001b[0m`);
+
 //Array of questions for user input
 const questions = [
   {
@@ -11,36 +16,54 @@ const questions = [
     message: "Please enter your Project Title: ",
     name: "title",
     default: () => usersEntry.title,
+    validate: function (value) {
+      return value === ""
+        ? "Field cannot be blank, please enter your Project Title"
+        : true;
+    },
   },
   {
     type: "input",
     message: "Please enter your Project Description: ",
     name: "description",
     default: () => usersEntry.description,
+    validate: function (value) {
+      return value === ""
+        ? "Field cannot be blank, please enter your Project Description"
+        : true;
+    },
   },
   {
     type: "input",
     message: "Please enter your Project's Installation Instructions: ",
     name: "installation",
-    default: () => usersEntry.installation,
+    default: () => {
+      return usersEntry.installation === "" ? "N/A" : usersEntry.installation;
+    },
   },
   {
     type: "input",
     message: "Please enter your Project's Usage Information: ",
     name: "usage",
-    default: () => usersEntry.usage,
+    default: () => {
+      return usersEntry.usage === "" ? "N/A" : usersEntry.usage;
+    },
   },
   {
     type: "input",
     message: "Please enter your Project's Contribution Guidelines: ",
     name: "contributions",
-    default: () => usersEntry.contributions,
+    default: () => {
+      return usersEntry.contributions === "" ? "N/A" : usersEntry.contributions;
+    },
   },
   {
     type: "input",
     message: "Please enter your Project's Test Instructions: ",
     name: "testing",
-    default: () => usersEntry.testing,
+    default: () => {
+      return usersEntry.testing === "" ? "N/A" : usersEntry.testing;
+    },
   },
   {
     type: "list",
@@ -62,6 +85,11 @@ const questions = [
     type: "input",
     message: "Please enter your Github Username: ",
     name: "username",
+    validate: function (value) {
+      return value === ""
+        ? "Field cannot be blank, please enter your Github Username"
+        : true;
+    },
   },
   {
     type: "input",
@@ -69,11 +97,9 @@ const questions = [
     name: "email",
     //Checks to see the user entered a valid email
     validate: function (value) {
-      if (validator.validate(value)) {
-        return true;
-      } else {
-        return "Please enter a valid email address.";
-      }
+      return validator.validate(value)
+        ? true
+        : "Please enter a valid email address";
     },
   },
 ];
@@ -136,19 +162,21 @@ function init() {
   inquirer
     .prompt(questions)
     .then((userAnswers) => {
-      console.log("Project Information:", userAnswers);
+      outputCyanText(
+        "Project Information: " + JSON.stringify(userAnswers, null, "\t")
+      );
       usersEntry = userAnswers;
 
       return inquirer.prompt(nextAction);
     })
     .then((userAction) => {
       if (userAction.userChoice.includes("submit")) {
-        console.log("Proceeding with the above answers...");
-        writeToFile("readme.md", usersEntry);
+        outputGreenText("Proceeding with the above answers...");
+        writeToFile("README.md", usersEntry);
       } else if (userAction.userChoice.includes("change")) {
         repeatPrompt();
       } else {
-        console.log("ending program now...");
+        outputRedText("ending program now...");
         return;
       }
     })
@@ -179,17 +207,17 @@ function repeatPrompt() {
             usersEntry[key] = newAnswers[key];
           }
         }
-        console.log("Project Information:", usersEntry);
+        outputCyanText("Project Information: "+ JSON.stringify(usersEntry));
         return inquirer.prompt(nextAction);
       })
       .then((userAction) => {
         if (userAction.userChoice.includes("submit")) {
-          console.log("Proceeding with the above answers...");
-          writeToFile("readme.md", usersEntry);
+          outputGreenText("Proceeding with the above answers...");
+          writeToFile("README.md", usersEntry);
         } else if (userAction.userChoice.includes("change")) {
           repeatPrompt();
         } else {
-          console.log("ending program now...");
+          outputRedText("ending program now...");
           return;
         }
       });
@@ -200,7 +228,7 @@ function repeatPrompt() {
 function writeToFile(fileName, data) {
   const markdownText = generateMarkdown(data);
   fs.writeFile(fileName, markdownText, (err) =>
-    err ? console.log(err) : console.log("Success!")
+    err ? console.log(err) : outputGreenText("Successfully created readme file!")
   );
 }
 

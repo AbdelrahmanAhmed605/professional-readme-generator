@@ -92,8 +92,8 @@ ${data.usage}
 
 ## Credits
 
-Github Username: ${data.username}
 Contact Email: ${data.email}
+Github Username: ${data.username}
 
 ${licenseSection}
 
