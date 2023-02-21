@@ -144,8 +144,7 @@ function init() {
     .then((userAction) => {
       if (userAction.userChoice.includes("submit")) {
         console.log("Proceeding with the above answers...");
-        const markdownText = generateMarkdown(usersEntry);
-        writeToFile("readme.md", markdownText);
+        writeToFile("readme.md", usersEntry);
       } else if (userAction.userChoice.includes("change")) {
         repeatPrompt();
       } else {
@@ -186,8 +185,7 @@ function repeatPrompt() {
       .then((userAction) => {
         if (userAction.userChoice.includes("submit")) {
           console.log("Proceeding with the above answers...");
-          const markdownText = generateMarkdown(usersEntry);
-          writeToFile("readme.md", markdownText);
+          writeToFile("readme.md", usersEntry);
         } else if (userAction.userChoice.includes("change")) {
           repeatPrompt();
         } else {
@@ -199,7 +197,12 @@ function repeatPrompt() {
 }
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  const markdownText = generateMarkdown(data);
+  fs.writeFile(fileName, markdownText, (err) =>
+    err ? console.log(err) : console.log("Success!")
+  );
+}
 
 // Function call to initialize app
 init();
