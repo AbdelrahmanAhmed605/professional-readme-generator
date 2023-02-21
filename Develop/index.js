@@ -2,6 +2,7 @@
 const inquirer = require("inquirer");
 const validator = require("email-validator");
 const fs = require("fs");
+const generateMarkdown = require("./utils/generateMarkdown.js");
 
 //Array of questions for user input
 const questions = [
@@ -143,7 +144,8 @@ function init() {
     .then((userAction) => {
       if (userAction.userChoice.includes("submit")) {
         console.log("Proceeding with the above answers...");
-        writeToFile("readme.md", usersEntry);
+        const markdownText = generateMarkdown(usersEntry);
+        writeToFile("readme.md", markdownText);
       } else if (userAction.userChoice.includes("change")) {
         repeatPrompt();
       } else {
@@ -184,7 +186,8 @@ function repeatPrompt() {
       .then((userAction) => {
         if (userAction.userChoice.includes("submit")) {
           console.log("Proceeding with the above answers...");
-          writeToFile("readme.md", usersEntry);
+          const markdownText = generateMarkdown(usersEntry);
+          writeToFile("readme.md", markdownText);
         } else if (userAction.userChoice.includes("change")) {
           repeatPrompt();
         } else {
