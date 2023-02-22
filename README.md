@@ -30,7 +30,7 @@ For a walkthrough of how to use the application, refer to the following demonstr
 
 Once the packages are installed, to run the application, the user must type `node index` in the terminal.  This will then generate a sequence of prompts requesting project information from the user. Once all the prompts have been completed, the user will be presented with all their input for them to review and then given the option to submit their input, make changes to their input, or end the application. If the user opts to make changes, they will be prompted to choose which sections they wish to make their changes to. The user will then be allowed to update their information as many times as they'd like until they are satisfied with the data that is displayed for them to review. Once the user is satisfied with their input and submit their input, a README.md file will be generated containig all the information they placed.
 
-##License
+## License
 
 This project is licensed under the MIT License. To see the license permissions for commercial and non-commercial use, modification, and distribution of the software, please see the full text of the license, available at https://opensource.org/licenses/MIT.
 
