@@ -5,11 +5,11 @@
 ## Description
 
 A command-line application that dynamically generates a professional README.md file from a user's input using the Inquirer package. The Inquirer package allows for the creation of command lind prompts to get input on a project's information from the user. Using this information, a markdown file is generated containing all of the user's information formatted into a professional readme file. During this project, Abdelrahman learnt the following skills: 
--using npm to install packages to the project 
--using npm init to create a package.json file where project dependencies can be tracked 
--using require to load modules into the project and attach them to a variable 
--using the inquirer and file-system packages appropriately through reading their documentation 
--using modularization to create multiple js files and export and import the modules
+- using npm to install packages to the project 
+- using npm init to create a package.json file where project dependencies can be tracked 
+- using require to load modules into the project and attach them to a variable 
+- using the inquirer and file-system packages appropriately through reading their documentation 
+- using modularization to create multiple js files and export and import the modules
 
 ## Table of Contents
 
