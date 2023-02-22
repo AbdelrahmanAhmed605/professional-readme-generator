@@ -57,7 +57,7 @@ function renderLicenseSection(license) {
   const licenseBadge = renderLicenseBadge(license);
   const licenseLink = renderLicenseLink(license);
   const licenseSection = `##License
-${licenseBadge}
+
 This project is licensed under the ${license}. To see the license permissions for commercial and non-commercial use, modification, and distribution of the software, please see the full text of the license, available at ${licenseLink}.`;
 
   return licenseSection;
@@ -65,9 +65,12 @@ This project is licensed under the ${license}. To see the license permissions fo
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
+  const licenseBadge = renderLicenseBadge(data.license);
   const licenseSection = renderLicenseSection(data.license);
 
   return `# ${data.title}
+
+${licenseBadge}
 
 ## Description
 
@@ -77,10 +80,10 @@ ${data.description}
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Credits](#credits)
 - [License](#license)
 - [How to Contribute](#how-to-contribute)
 - [Tests](#tests)
+- [Questions](#questions)
 
 ## Installation
 
@@ -89,11 +92,6 @@ ${data.installation}
 ## Usage
 
 ${data.usage}
-
-## Credits
-
-Contact Email: ${data.email}
-Github Username: ${data.username}
 
 ${licenseSection}
 
@@ -104,6 +102,11 @@ ${data.contributions}
 ## Tests
 
 ${data.testing}
+
+## Questions
+
+If you have any questions regarding this application, feel free to reach me at ${data.email} with the subject title "Question for Professional-readme-generator"
+You can also find me on github here: ${"https://github.com/" + data.username}
 `;
 }
 
