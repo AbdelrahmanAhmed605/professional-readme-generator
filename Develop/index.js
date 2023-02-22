@@ -122,7 +122,7 @@ const nextAction = [
 const changeEntries = [
   {
     type: "checkbox",
-    message: "Please select the options you want to change",
+    message: "Please select the sections you want to make changes to",
     name: "changeTopics",
     choices: [
       { name: "Project Title", value: "title" },
@@ -207,7 +207,7 @@ function repeatPrompt() {
             usersEntry[key] = newAnswers[key];
           }
         }
-        outputCyanText("Project Information: "+ JSON.stringify(usersEntry));
+        outputCyanText("Project Information: "+ JSON.stringify(usersEntry, null, "\t"));
         return inquirer.prompt(nextAction);
       })
       .then((userAction) => {
