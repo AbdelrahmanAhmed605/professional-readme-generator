@@ -56,7 +56,7 @@ function renderLicenseSection(license) {
   }
   const licenseBadge = renderLicenseBadge(license);
   const licenseLink = renderLicenseLink(license);
-  const licenseSection = `##License
+  const licenseSection = `## License
 
 This project is licensed under the ${license}. To see the license permissions for commercial and non-commercial use, modification, and distribution of the software, please see the full text of the license, available at ${licenseLink}.`;
 
